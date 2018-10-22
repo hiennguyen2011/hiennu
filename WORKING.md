@@ -7,5 +7,5 @@ Grand total: 8 hours
 
 b. On this exercise,Using visual studio community 2017 , javascript D3 Library , HTML5
 c. Sort feature and pagination in .NET core server side but do not have time to
-complete.
+complete
 
