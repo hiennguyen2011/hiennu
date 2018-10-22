@@ -194,10 +194,11 @@
                     .append('td')
                     .text(function (d) { return d.value; });
 
-                d3.select('#myTable').selectAll("tr")
-                    .style("display", function (d, i) {
-                        return i >= 0 && i <= 50 ? null : "none";
-                    });
+                // TODO: pagination in table using d3
+                //d3.select('#myTable').selectAll("tr")
+                //    .style("display", function (d, i) {
+                //        return i >= 0 && i <= 50 ? null : "none";
+                //    });
                 
                 return table;
             };
