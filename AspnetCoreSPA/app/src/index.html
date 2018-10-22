@@ -8,17 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Contact List</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        #myInput {
+            width: 450px;
+            height: 25px;
+            background-image: url("/search_icon.jpg");
+            background-repeat: no-repeat;
+            background-size: 25px 25px;
+            font-weight: bold;
+            background-position: right;
         }
 
         body {
             font: 14px/1.4 Georgia, Serif;
-        }
-
-        #page-wrap {
-            margin: 50px;
         }
 
         p {
@@ -26,8 +27,9 @@
         }
 
         table {
-            width: 100%;
-            border-collapse: collapse;
+            width: 70%;
+            margin-left: 15%;
+            margin-right: 15%;
         }
 
         tr:nth-of-type(odd) {
@@ -58,7 +60,6 @@
             }
 
         @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
-
 
             table, thead, tbody, th, td, tr {
                 display: block;
@@ -111,47 +112,6 @@
                 width: 495px;
             }
         }
-
-        .chart {
-            background: #fbae17;
-        }
-
-        .btn {
-            font-family: inherit;
-            font-size: 16px;
-            cursor: pointer;
-            display: inline-block;
-            padding: .5rem 1rem;
-            height: auto;
-            border: 1px solid transparent;
-            vertical-align: middle;
-            -webkit-appearance: none;
-            color: inherit;
-            background-color: transparent;
-            text-decoration: none;
-            letter-spacing: 2px;
-        }
-
-        .btn-primary {
-            color: #fff;
-            background-color: #de3d83;
-            border-radius: 3px;
-        }
-
-            .btn-primary:hover {
-                box-shadow: inset 0 0 0 20rem #C73675;
-            }
-
-        .SearchBar {
-            display: inline;
-            position: relative;
-            left: 1%;
-        }
-
-            .SearchBar input {
-                position: relative;
-                left: 2%;
-            }
     </style>
 </head>
 
@@ -162,9 +122,10 @@
         </div>
         <p>
             <div align="center">
-                <h1> <input type="text" id="myInput" width="500" SearchBar" onkeyup="searchFunction()" placeholder="Search contracts"></h1>
+                <h1> <input type="text" id="myInput" size="80" onkeyup="searchFunction()" placeholder="Search contracts"></h1>
             </div>
         </p>
+       
         <script type="text/javascript">
 
             function searchFunction() {
@@ -205,7 +166,9 @@
 
             var tabulate = function (data) {
                 var titles = d3.keys(data[0]);
-                var table = d3.select('body').append('table').attr("id", "myTable");
+                var table = d3.select('body').append('table')
+                    .attr("id", "myTable");
+
                 var thead = table.append('thead');
                 var tbody = table.append('tbody');
 
@@ -231,22 +194,13 @@
                     .append('td')
                     .text(function (d) { return d.value; });
 
+                d3.select('#myTable').selectAll("tr")
+                    .style("display", function (d, i) {
+                        return i >= 0 && i <= 50 ? null : "none";
+                    });
+                
                 return table;
             };
-
-            //d3.csv("/SampleData.csv", function (data) {
-            //    var newdata = data.map(function (d) {
-            //        return {
-            //            first_name: d.first_name,
-            //            last_name: d.last_name,
-            //            email: d.email,
-            //            phone1: d.phone1
-            //        };
-
-            //    });
-            //    tabulate(newdata);
-
-            //});
 
             d3.csv("/api/SampleData/LoadSampleData", function (data) {
                 var newdata = data.map(function (d) {
@@ -258,10 +212,12 @@
                     };
 
                 });
+
                 tabulate(newdata);
 
             });
         </script>
+
     </div>
 </body>
 </html>
